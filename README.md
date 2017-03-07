@@ -48,3 +48,14 @@ a `pipline.yaml` specified, so all you need to do is run `dmk`:
 ```
 $ YT_KEY=your_key_here dmk
 ```
+
+## Credits
+
+The YouTube crawling code in the ytcrawl package was cloned from
+https://github.com/yuhonglin/YTCrawl, converted to Python 3, and changed for
+this project. The original code is release under the BSD 3 clause license,
+as is this repository.
+
+## License
+
+The code in this repository is licensed under the BSD 3 clause license.
