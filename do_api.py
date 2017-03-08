@@ -5,35 +5,26 @@
 You need to get a YouTube API key from the Google Developer's Console. Then
 you can run this script like so:
 
-YT_KEY=your_key_here python3 ./basics.py < ../ted_joined.csv | tee basics.json
+YT_KEY=your_key_here python3 ./do_api.py --csv some_csv_file.csv
 
-Note that you'll need to have already created the ted_joined.csv file in the
-parent directory.
+The final file will api.json
 """
 
 # pylama:ignore=E501,D213
 
-import csv
 import requests
 import json
 import os
-import sys
-import inspect
 
+from common import check_env_file, youtube_id_from_cmdline, log
 
+check_env_file()
 KEY = os.environ['YT_KEY']
 if not KEY:
     raise ValueError("YT_KEY env variable not set")
 
-
-def log(msg, *args):
-    """Log to stderr with optional formatting."""
-    if args:
-        msg = msg % args
-    pre = inspect.getfile(sys._getframe(1)) + ": "
-    sys.stderr.write(pre + msg + "\n")
-    sys.stderr.flush()
-    sys.stdout.flush()
+# Make sure other scripts can import our target file
+OUTPUT_FILE = "api.json"
 
 
 class Getter(object):
@@ -75,9 +66,9 @@ class Getter(object):
 def main():
     """Entry point."""
     getter = Getter()
-    for r in csv.DictReader(sys.stdin):
-        getter.add(r['youtube_id'])
-    getter.get()
+    for ytid in youtube_id_from_cmdline():
+        getter.add(ytid)
+    getter.get()  # Final flush
 
 
 if __name__ == '__main__':
