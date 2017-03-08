@@ -9,8 +9,19 @@ import os
 import re
 import sys
 
+import os.path as pth
+
 if sys.version_info[0] < 3:
     raise ValueError("Python 3 is required for this crawler")
+
+
+FILE_PATH = inspect.getabsfile(lambda i: i)
+SCRIPT_DIR = pth.dirname(FILE_PATH)
+
+
+def rel_path(*parts):
+    """Return a path relative to this script's dir using the parts given."""
+    return pth.abspath(pth.join(SCRIPT_DIR, *parts))
 
 
 def log(msg, *args):
@@ -44,7 +55,7 @@ def fields(filename):
 
 def check_env_file():
     """Check for existence of env file and process it."""
-    if os.path.isfile(".env"):
+    if pth.isfile(".env"):
         log("Reading environment variables from .env")
         with open(".env", "r") as fh:
             for line in fh:

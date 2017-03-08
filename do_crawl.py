@@ -5,11 +5,11 @@
 # pylama:ignore=E501
 
 # Note that the common import also checks for Python 3
-from common import youtube_id_from_cmdline, log
+from common import youtube_id_from_cmdline, log, rel_path
 
 # Make sure these parameters can be imported from another script
-BATCH_FILE = "batch_ytid.txt"
-OUTPUT_DIR = "output"
+BATCH_FILE = rel_path("batch_ytid.txt")
+OUTPUT_DIR = rel_path("output")
 
 
 def main():

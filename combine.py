@@ -18,6 +18,14 @@ from bs4 import BeautifulSoup
 
 from common import log
 
+# Get the location of the crawled data and the API JSON output
+import do_crawl
+import do_api
+
+CRAWL_OUTPUT = os.path.join(do_crawl.OUTPUT_DIR, "data")
+API_FILE = do_api.OUTPUT_FILE
+
+# We track all brag bar labels from the crawled output for display later
 ALL_BRAG_BAR = set()
 
 

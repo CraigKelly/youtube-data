@@ -1,6 +1,8 @@
 # project-specific skips
+batch_ytid.txt
 *.csv
 *.json
+output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

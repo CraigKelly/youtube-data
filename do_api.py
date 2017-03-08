@@ -16,7 +16,7 @@ import requests
 import json
 import os
 
-from common import check_env_file, youtube_id_from_cmdline, log
+from common import check_env_file, youtube_id_from_cmdline, log, rel_path
 
 check_env_file()
 KEY = os.environ['YT_KEY']
@@ -24,7 +24,7 @@ if not KEY:
     raise ValueError("YT_KEY env variable not set")
 
 # Make sure other scripts can import our target file
-OUTPUT_FILE = "api.json"
+OUTPUT_FILE = rel_path("api.json")
 
 
 class Getter(object):
