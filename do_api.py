@@ -55,9 +55,10 @@ class Getter(object):
         )
 
         count = 0
-        for i in resp.json().get('items', []):
-            print(json.dumps(i))
-            count += 1
+        with open(OUTPUT_FILE, "a") as fh:
+            for i in resp.json().get('items', []):
+                fh.write(json.dumps(i) + '\n')
+                count += 1
 
         self.buffer = set()
         log("Retrieved %d records", count)
