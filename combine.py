@@ -196,7 +196,7 @@ def main():
                 ints(brag_bar.get("Shares", "")),                # BBShares
                 ints(brag_bar.get("Subscriptions driven", "")),  # BBSubscriptions
                 ints(brag_bar.get("Views", "")),                 # BBViews
-                ints(brag_bar.get("Time watched", "")),          # BBTimeWatched
+                brag_bar.get("Time watched", ""),                # BBTimeWatched
                 normws(snippet.get("description", "")),          # Description
                 "|".join(snippet.get("tags", [])),               # Tags
             ])
