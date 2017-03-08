@@ -25,8 +25,8 @@ API_FILE = do_api.OUTPUT_FILE
 ALL_BRAG_BAR = set()
 
 # Files that we write
-OUTPUT_DATA = rel_path("output.csv")
-OUTPUT_DAILIES = rel_path("dailies.csv")
+OUTPUT_DATA = rel_path("youtube-data.csv")
+OUTPUT_DAILIES = rel_path("youtube-daily-views.csv")
 
 DATA_COLS = [
     "YouTubeID",
