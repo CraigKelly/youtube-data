@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# this is just a sample bash script for performing a completely clean run
+
+# IMPORTANT! A clean run isn't always the best thing - for instance, the
+# do_crawl.py is restartable (which is important since it can run a long time
+# and things happen).
+
+# Quit if there's an error
+set -e
+
+# Run in the directory containing this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+
+# For this example, require YT_KEY to already be defined in the environment or
+# in the .env file. See README.md for details
+if [ "$YT_KEY" = "" ]; then
+    if grep -q YT_KEY .env; then
+        echo "Found YT_KEY in .env - continuing"
+    else
+        echo "You need to define YT_KEY in .env (or the actual environment)"
+        exit 1
+    fi
+else
+   echo "Found YT_KEY variable - continuing"
+fi
+
+# clear do_crawl.py output
+rm -f batch_ytid.txt
+rm -fr output
+# clear do_api.py output
+rm -f api.json
+# clear combine.py output
+rm -f youtube-data.csv
+rm -f youtube-daily-views.csv
+
+# Actually run our 3 scripts
+# The API is easy so run it first. Note that we can just pass the same command
+# line to both do_ scripts.
+./do_api.py "$@"
+./do_crawl.py "$@"
+./combine.py
