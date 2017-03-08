@@ -2,31 +2,23 @@
 
 """Extracting data from ytcrawl output dir and api.json file."""
 
+# TODO: for API and ytcrawl, we might not have 100% ID overlap, so be sure to handle missing values
 # TODO: read API Data
 # TODO: join ytcrawl with API
-# TODO: output everything and include a watch URL
+# TODO: create a watch URL
+# TODO: output everything as CSV
 
 # pylama:ignore=E501,D213
 
 import json
 import os
-import sys
-import inspect
 import tarfile
 
 from bs4 import BeautifulSoup
 
+from common import log
+
 ALL_BRAG_BAR = set()
-
-
-def log(msg, *args):
-    """Log to stderr with optional formatting."""
-    if args:
-        msg = msg % args
-    pre = inspect.getfile(sys._getframe(1)) + ": "
-    sys.stderr.write(pre + msg + "\n")
-    sys.stderr.flush()
-    sys.stdout.flush()
 
 
 def extract(buffer, start_tag, end_tag):
